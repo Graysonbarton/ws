@@ -77,7 +77,7 @@ This class represents a WebSocket server. It extends the `EventEmitter`.
   - `allowSynchronousEvents` {Boolean} Specifies whether any of the `'message'`,
     `'ping'`, and `'pong'` events can be emitted multiple times in the same
     tick. Defaults to `true`. Setting it to `false` improves compatibility with
-    the WHATWG standardbut may negatively impact performance.
+    the WHATWG standard but may negatively impact performance.
   - `backlog` {Number} The maximum length of the queue of pending connections.
   - `clientTracking` {Boolean} Specifies whether or not to track clients.
   - `handleProtocols` {Function} A function which can be used to handle the
@@ -257,7 +257,7 @@ receives an `Error` if the server is already closed.
 - `request` {http.IncomingMessage} The client HTTP GET request.
 - `socket` {stream.Duplex} The network socket between the server and client.
 - `head` {Buffer} The first packet of the upgraded stream.
-- `callback` {Function}.
+- `callback` {Function}
 
 Handle a HTTP upgrade request. When the HTTP server is created internally or
 when the HTTP server is passed via the `server` option, this method is called
@@ -395,7 +395,7 @@ of the string values defined below under [Error codes](#error-codes).
 
 ### Event: 'message'
 
-- `data` {Buffer|ArrayBuffer|Buffer[]}
+- `data` {ArrayBuffer|Blob|Buffer|Buffer[]}
 - `isBinary` {Boolean}
 
 Emitted when a message is received. `data` is the message content. `isBinary`
@@ -466,10 +466,11 @@ does nothing if `type` is not one of `'close'`, `'error'`, `'message'`, or
 - {String}
 
 A string indicating the type of binary data being transmitted by the connection.
-This should be one of "nodebuffer", "arraybuffer" or "fragments". Defaults to
-"nodebuffer". Type "fragments" will emit the array of fragments as received from
-the sender, without copyfull concatenation, which is useful for the performance
-of binary protocols transferring large messages with multiple fragments.
+This should be one of "nodebuffer", "arraybuffer", "blob", or "fragments".
+Defaults to "nodebuffer". Type "fragments" will emit the array of fragments as
+received from the sender, without copyfull concatenation, which is useful for
+the performance of binary protocols transferring large messages with multiple
+fragments.
 
 ### websocket.bufferedAmount
 
@@ -538,7 +539,8 @@ is a noop if the ready state is `CONNECTING` or `CLOSED`.
 
 ### websocket.ping([data[, mask]][, callback])
 
-- `data` {Array|Number|Object|String|ArrayBuffer|Buffer|DataView|TypedArray} The
+- `data`
+  {Array|Number|Object|String|ArrayBuffer|Buffer|DataView|TypedArray|Blob} The
   data to send in the ping frame.
 - `mask` {Boolean} Specifies whether `data` should be masked or not. Defaults to
   `true` when `websocket` is not a server client.
@@ -550,7 +552,8 @@ Send a ping. This method throws an error if the ready state is `CONNECTING`.
 
 ### websocket.pong([data[, mask]][, callback])
 
-- `data` {Array|Number|Object|String|ArrayBuffer|Buffer|DataView|TypedArray} The
+- `data`
+  {Array|Number|Object|String|ArrayBuffer|Buffer|DataView|TypedArray|Blob} The
   data to send in the pong frame.
 - `mask` {Boolean} Specifies whether `data` should be masked or not. Defaults to
   `true` when `websocket` is not a server client.
@@ -588,7 +591,8 @@ only removes listeners added with
 
 ### websocket.send(data[, options][, callback])
 
-- `data` {Array|Number|Object|String|ArrayBuffer|Buffer|DataView|TypedArray} The
+- `data`
+  {Array|Number|Object|String|ArrayBuffer|Buffer|DataView|TypedArray|Blob} The
   data to send. `Object` values are only supported if they conform to the
   requirements of [`Buffer.from()`][]. If those constraints are not met, a
   `TypeError` is thrown.
