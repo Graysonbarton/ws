@@ -39,3 +39,5 @@ will create and publish a security advisory to
   [ReDoS in `Sec-Websocket-Protocol` header](https://github.com/websockets/ws/releases/tag/7.4.6)
 - 16 Jun 2024:
   [DoS when handling a request with many HTTP headers](https://github.com/websockets/ws/releases/tag/8.17.1)
+- 12 May 2026:
+  [Uninitialized memory disclosure in `websocket.close()`](https://github.com/websockets/ws/releases/tag/8.20.1)
